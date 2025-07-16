@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date & Time Picker for Telegram</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2em; }
+    input { font-size: 1.2em; margin: 1em 0; }
+    button { font-size: 1.2em; padding: 0.5em 1em; }
+  </style>
+</head>
+<body>
+  <h2>Select date and time</h2>
+  <input type="date" id="date" required><br>
+  <input type="time" id="time" required><br>
+  <button onclick="sendResult()">Submit</button>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    function sendResult() {
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      if (!date || !time) {
+        alert("Please select both date and time!");
+        return;
+      }
+      const data = `${date} ${time}`;
+      Telegram.WebApp.sendData(data); // Отправить данные в бот
+      Telegram.WebApp.close();
+    }
+    Telegram.WebApp.ready();
+  </script>
+</body>
+</html>
+
